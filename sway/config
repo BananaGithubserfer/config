@@ -15,6 +15,7 @@ input * {
     xkb_layout us,ru
     xkb_options grp:alt_shift_toggle
 }
+
 #for_window [app_id="librewolf"] opacity 0.5
 #exec dbus-daemon --session
 #exec pipewire

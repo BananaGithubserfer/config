@@ -1,8 +1,11 @@
 * {
-    /* `otf-font-awesome` is required to be installed for icons */
     font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     font-size: 18px;
 }
+
+button { border: none; }
+label:disabled, button:disabled { color: inherit; }
+button:hover { background: inherit; }
 
 window#waybar {
     background-color: rgba(43, 48, 59, 0.5);
@@ -70,7 +73,6 @@ window#waybar.solo {
 #idle_inhibitor,
 #mpd {
     padding: 0 10px;
-    color: #ffffff;
 }
 
 #window,

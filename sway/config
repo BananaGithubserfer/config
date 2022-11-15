@@ -1,7 +1,10 @@
 #output * bg ~/.config/sway/wallpapers/red_kali_dragon-wallpaper-3840x2160.jpg fill
 #output HDMI-A-1 bg ~/.config/sway/wallpapers/artix.png fill
 #output eDP-1 bg ~/.config/sway/wallpapers/linux.png fill
-output * bg ~/.config/sway/wallpapers/sa-oblakami1.jpg fill
+#output * bg ~/.config/sway/wallpapers/sa-oblakami1.jpg fill
+#output * bg ~/.config/sway/wallpapers/cat.jpg fill
+#output * bg ~/.config/sway/wallpapers/y.jpg fill
+exec ~/.config/sway/wall.sh
 xwayland disable
 
 input "type:keyboard" {
@@ -46,6 +49,8 @@ workspace 7 output eDP-1
 workspace 8 output HDMI-A-1
 workspace 9 output eDP-1
 workspace 10 output HDMI-A-1
+
+    bindsym --to-code alt+y exec ~/.config/sway/y.sh
 
 	bindsym --to-code XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
     bindsym --to-code XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%

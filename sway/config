@@ -4,6 +4,7 @@
 #output * bg ~/.config/sway/wallpapers/sa-oblakami1.jpg fill
 #output * bg ~/.config/sway/wallpapers/cat.jpg fill
 #output * bg ~/.config/sway/wallpapers/y.jpg fill
+#output * bg  ~/.config/sway/wallpapers/photo_2022-11-21_17-38-39.jpg fill
 exec ~/.config/sway/wall.sh
 xwayland disable
 
@@ -19,17 +20,10 @@ input * {
     xkb_options grp:alt_shift_toggle
 }
 
-#for_window [app_id="librewolf"] opacity 0.5
-#exec dbus-daemon --session
-#exec pipewire
-#exec pipewire-media-session
-#exec dbus-update-activation-environment  DISPLAY I3SOCK SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-#exec /usr/lib/xdg-desktop-portal -r 
-#exec /usr/local/libexec/xdg-desktop-portal-wlr
-#exec ~/.config/sway/lock.sh
 exec gsettings set org.gnome.desktop.interface gtk-theme "Dracula"
 exec gsettings set org.gnome.desktop.wm.preferences theme "Dracula"
 exec gsettings set org.gnome.desktop.interface icon-theme "Dracula"
+for_window [app_id="librewolf"] opacity 0.5
 
 seat seat0 hide_cursor 5000
 #output HDMI-A-1 resolution 1920x1080 position 0 0

@@ -172,6 +172,7 @@ vnoremap в "0d
 noremap ; $
 noremap ж $
 nnoremap <C-t> :-1read $HOME/.config/nvim/c.c<CR>/{<CR>o
+nnoremap \ :Telescope current_buffer_fuzzy_find<CR>
 
 "commands
 cnoreabbrev git !git

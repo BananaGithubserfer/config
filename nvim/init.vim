@@ -1,4 +1,4 @@
-:set number relativenumber
+:set number "relativenumber
 :set splitbelow
 :set noswapfile
 :set nobackup
@@ -121,6 +121,9 @@ autocmd BufEnter *.c :call Forc()
 
 
 "run code
+nnoremap <tab> :split<CR>:Ttoggle<cr>
+
+autocmd Filetype php nnoremap <buffer> <tab> :w<CR>:split<CR>: T php % <CR>
 autocmd Filetype python nnoremap <buffer> <tab> :w<CR>:split<CR>: T exec python3 -i %<CR>
 autocmd Filetype c nnoremap <buffer> <tab> :w<CR>:split<CR>: T g++ % -o /tmp/a.aut && /tmp/a.aut<CR>
 let g:neoterm_autoinsert = 1
@@ -183,4 +186,3 @@ command WQ wq!
 command W w!
 command Q q!
 command Qa Qa!
-

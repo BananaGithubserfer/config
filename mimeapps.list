@@ -1,11 +1,30 @@
 [Default Applications]
-x-scheme-handler/tg=userapp-Telegram Desktop-E3QWT1.desktop
-text/html=librewolf.desktop
-x-scheme-handler/http=librewolf.desktop
-x-scheme-handler/https=librewolf.desktop
-x-scheme-handler/about=librewolf.desktop
-x-scheme-handler/unknown=librewolf.desktop
+application/json=librewolf.desktop;firefox.desktop;
+application/pdf=librewolf.desktop;firefox.desktop;
+application/x-shellscript=nvim.desktop;
+application/x-xdg-protocol-tg=telegramdesktop.desktop;
+application/x-xpinstall=librewolf.desktop;firefox.desktop;
+application/xhtml+xml=librewolf.desktop;firefox.desktop;
+text/english=nvim.desktop;
+text/html=librewolf.desktop;firefox.desktop;
+text/plain=nvim.desktop;
+text/x-c=nvim.desktop;
+text/x-c++=nvim.desktop;
+text/x-c++hdr=nvim.desktop;
+text/x-c++src=nvim.desktop;
+text/x-chdr=nvim.desktop;
+text/x-csrc=nvim.desktop;
+text/x-java=nvim.desktop;
+text/x-makefile=nvim.desktop;
+text/x-moc=nvim.desktop;
+text/x-pascal=nvim.desktop;
+text/x-tcl=nvim.desktop;
+text/x-tex=nvim.desktop;
+text/xml=librewolf.desktop;firefox.desktop;
+x-scheme-handler/http=librewolf.desktop;firefox.desktop;
+x-scheme-handler/https=librewolf.desktop;firefox.desktop;
+x-scheme-handler/tg=userapp-Telegram Desktop-OSX9W1.desktop
 
 [Added Associations]
-x-scheme-handler/tg=userapp-Telegram Desktop-E3QWT1.desktop;
+x-scheme-handler/tg=userapp-Kotatogram Desktop-THOIW1.desktop;userapp-Telegram Desktop-5NPNW1.desktop;userapp-Telegram Desktop-OSX9W1.desktop;
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=librewolf.desktop;

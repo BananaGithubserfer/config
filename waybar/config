@@ -18,8 +18,6 @@
              "1": "",
              "2": "",
              "3": "",
-             "4": "",
-             "5": "",
              "urgent": "",
              "focused": "",
              "default": ""
@@ -45,7 +43,8 @@
     },
     "cpu": {
         "format": "{usage}% ",
-        "tooltip": false
+        "tooltip": false,
+        "on-click": "alacritty -e htop"
     },
     "memory": {
         "format": "{}% "

@@ -79,7 +79,6 @@ colors:
     text: CellForeground
     background: '#44475a'
 
-
   normal:
     black: '#000000'
     red: '#C01C28'
@@ -98,5 +97,3 @@ colors:
     magenta: '#C061CB'
     cyan: '#33C7DE'
     white: '#ffffff'
-
-

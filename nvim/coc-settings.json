@@ -1,0 +1,5 @@
+{
+    "python.linting.enabled": true,
+    "suggest.enablePreselect": false,
+    "suggest.noselect": true
+}

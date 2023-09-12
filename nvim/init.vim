@@ -1,3 +1,4 @@
+:set rulerformat=%36(%F\ %)%=%l,\ %v
 :set number "relativenumber
 :set splitbelow
 :set smartindent
@@ -20,11 +21,12 @@
 :set nohlsearch
 
 call plug#begin()
+Plug 'mindriot101/vim-yapf'
+Plug 'windwp/nvim-autopairs'
 Plug 'Wansmer/langmapper.nvim'
 Plug 'gregsexton/MatchTag'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'vim-autoformat/vim-autoformat'
-"    Plug 'andymass/vim-matchup'
 Plug 'ap/vim-css-color'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mhinz/vim-startify'
@@ -33,9 +35,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make'}
 Plug 'kassio/neoterm'
-"    Plug 'https://github.com/arnar/vim-matchopen'
-"    Plug 'tpope/vim-fugitive'
-"   Plug 'rhysd/vim-clang-format'
+Plug 'rhysd/vim-clang-format'
 call plug#end()
 
 
@@ -125,6 +125,12 @@ function! Forc()
 endfunction
 
 autocmd filetype c :call Forc()
+autocmd filetype cpp :call Forc()
+autocmd filetype c nmap <buffer> f :ClangFormat<cr>
+autocmd filetype cpp nmap <buffer> f :ClangFormat<cr>
+
+autocmd filetype python nmap <buffer> f :Yapf<cr>
+let g:yapf_style = "pep8"
 
 "for html
 let g:matchup_matchparen_offscreen = {'method': 'popup'}
@@ -152,8 +158,9 @@ nnoremap <tab> :split<CR>:Ttoggle<cr>
 nnoremap f :Autoformat<cr>
 
 autocmd filetype php nnoremap <buffer> <tab> :w<CR>:split<CR>: T php % <CR>
-autocmd filetype python nnoremap <buffer> <tab> :w<CR>:split<CR>: T exec python3 -i %<CR>
+autocmd filetype python nnoremap <buffer> <tab> :w<CR>:split<CR>: T exec python3 -i %<CR><cr>
 autocmd filetype c nnoremap <buffer> <tab> :w<CR>:split<CR>:T g++ % -o /tmp/a.aut && echo "##running##" && /tmp/a.aut<CR><cr>
+autocmd filetype cpp nnoremap <buffer> <tab> :w<CR>:split<CR>:T g++ % -o /tmp/a.aut && echo "##running##" && /tmp/a.aut<CR><cr>
 autocmd filetype sh nnoremap <buffer> <tab> :w<CR>:split<CR>: T bash %<CR>
 
 autocmd filetype html nnoremap <buffer> <tab> :AsyncRun browser-sync start --server --no-online --no-notify --files . <CR><cr>
@@ -219,17 +226,13 @@ nnoremap <C-Space> @q
 "nnoremap / <cmd> :Telescope current_buffer_fuzzy_find<cr>
 nnoremap sf <cmd>Telescope live_grep hidden=true <cr>
 "nnoremap <Space> :Ntree<CR>
-nnoremap <Space> :Ex <bar> :sil! /<C-R>=expand("%:t")<CR><CR>
+nnoremap <Space> :Ex <bar> :sil! /<C-R>=expand("%:t")<CR><CR><cr>
 inoremap jj <esc>
 inoremap оо <esc>
 cnoremap jj <esc>
 cnoremap оо <esc>
-nnoremap d "0d
-vnoremap d "0d
-nnoremap в "0d
 nnoremap <C-l> <cr>
 inoremap <C-l> <cr>
-vnoremap в "0d
 noremap ; $
 noremap ж $
 nnoremap <C-t> :-1read $HOME/.config/nvim/c.c<CR>/{<CR>o
@@ -247,6 +250,34 @@ command Qa Qa!
 
 
 lua << EOF
+require("nvim-autopairs").setup {}
+local remap = vim.api.nvim_set_keymap
+local npairs = require('nvim-autopairs')
+npairs.setup({map_cr=false})
+
+-- skip it, if you use another global object
+_G.MUtils= {}
+
+-- old version
+-- MUtils.completion_confirm=function()
+-- if vim.fn["coc#pum#visible"]() ~= 0 then
+-- return vim.fn["coc#_select_confirm"]()
+-- else
+-- return npairs.autopairs_cr()
+-- end
+-- end
+
+-- new version for custom pum
+MUtils.completion_confirm=function()
+if vim.fn["coc#pum#visible"]() ~= 0  then
+    return vim.fn["coc#pum#confirm"]()
+else
+    return npairs.autopairs_cr()
+    end
+    end
+
+remap('i' , '<CR>','v:lua.MUtils.completion_confirm()', {expr = true , noremap = true})
+
 local function escape(str)
 -- You need to escape these characters to work correctly
 local escape_chars = [[;,."|\]]
@@ -258,11 +289,10 @@ local en = [[`qwertyuiop[]asdfghjkl;'zxcvbnm/]]
 local ru = [[ёйцукенгшщзхъфывапролджэячсмить.]]
 local en_shift = [[~QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>]]
 local ru_shift = [[ËЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]]
-
 vim.opt.langmap = vim.fn.join({
 -- | `to` should be first     | `from` should be second
 escape(ru_shift) .. ';' .. escape(en_shift),
 escape(ru) .. ';' .. escape(en),
 }, ',')
-EOF
 
+EOF

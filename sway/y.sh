@@ -1,4 +1,4 @@
-if [[ $(ps aux | grep y2.png | grep -v grep) ]]; then 
+if [[ $(ps aux | grep y2.png | grep -v grep) ]]; then
     pkill swaybg
     ~/.config/sway/wall.sh
 else

@@ -1,3 +1,6 @@
+"""default options"""
+:set foldmethod=indent
+:set foldlevel=1000
 :set rulerformat=%36(%F\ %)%=%l,\ %v
 :set number "relativenumber
 :set splitbelow
@@ -20,29 +23,40 @@
 :set autochdir
 :set nohlsearch
 
+"""plug plugins"""
 call plug#begin()
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'mfussenegger/nvim-dap'
+Plug 'folke/tokyonight.nvim'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'mindriot101/vim-yapf'
-Plug 'windwp/nvim-autopairs'
-Plug 'Wansmer/langmapper.nvim'
-Plug 'gregsexton/MatchTag'
-Plug 'skywind3000/asyncrun.vim'
-Plug 'vim-autoformat/vim-autoformat'
-Plug 'ap/vim-css-color'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'mhinz/vim-startify'
-Plug 'dracula/vim', { 'name': 'dracula' }
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make'}
-Plug 'kassio/neoterm'
 Plug 'rhysd/vim-clang-format'
+Plug 'ap/vim-css-color'
+Plug 'mhinz/vim-startify'
+Plug 'kassio/neoterm'
+Plug 'vim-autoformat/vim-autoformat'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'gregsexton/MatchTag'
+"Plug 'neoclide/coc-pairs'
+"Plug 'windwp/nvim-autopairs'
+"Plug 'gosukiwi/vim-smartpairs'
+"Plug 'dracula/vim', { 'name': 'dracula' }
+"Plug 'Wansmer/langmapper.nvim'
+"Plug 'nvim-lua/plenary.nvim'
+"Plug 'cordx56/lexima.vim-coc.nvim'
+"Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+"Plug 'folke/tokyonight.nvim'
+"Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+"Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make'}
+
+
 call plug#end()
 
 
-"startify"
+"""startify"""
 function! StartifyMapping()
     nmap <buffer> l <CR>
-    nmap <buffer> / :Telescope find_files hidden=true <CR>
+    "    nmap <buffer> / :Telescope find_files hidden=true <CR>
 endfunction
 
 augroup startify_mapping
@@ -64,7 +78,9 @@ let g:startify_bookmarks = [
             \ { 'c': '~/.config/' },
             \ { 'b': '~/.bashrc' },
             \ ]
-"netrw"
+
+
+"""netrw"""
 let g:netrw_banner = 0
 let g:netrw_keepdir = 0
 let g:netrw_preview = 1
@@ -72,34 +88,18 @@ let g:netrw_list_hide = '^\./$,^\../$'
 "let g:netrw_hide = 1
 "let g:netrw_liststyle = 3
 
-function! NetrwRemoveRecursive()
-    if &filetype ==# 'netrw'
-        cnoremap <buffer> <CR> rm -r<CR>
-        normal mu
-        normal mf
-
-        try
-            normal mx
-        catch
-            echo "Canceled"
-        endtry
-
-        cunmap <buffer> <CR>
-    endif
-endfunction
-
 function! NetrwMapping()
-    nmap <buffer> <Space> <cmd>:Telescope find_files hidden=true <CR>
-    nmap <buffer> ff <cmd>:Telescope find_files hidden=true <CR>
-    nmap <buffer> / <cmd>:Telescope find_files hidden=true <CR>
+    nmap <buffer> q :bd<cr>
     nmap <buffer> s :Startify<cr>
-    nmap <buffer> fd :call NetrwRemoveRecursive()<CR>
     nmap <buffer> h -^
     nmap <buffer> l <CR>
     nmap <buffer> t %
     nmap <buffer> fr R
     nmap <buffer> m mf
     nmap <buffer> c mc
+    " nmap <buffer> <Space> <cmd>:Telescope find_files hidden=true <CR>
+    " nmap <buffer> ff <cmd>:Telescope find_files hidden=true <CR>
+    " nmap <buffer> / <cmd>:Telescope find_files hidden=true <CR>
 endfunction
 
 augroup netrw_mapping
@@ -107,40 +107,25 @@ augroup netrw_mapping
     autocmd filetype netrw call NetrwMapping()
 augroup END
 
-"for c++
-function! Forc()
-    "    if !echo % == ""
-    "        echo "forc"
-    "        :-1read $HOME/.config/nvim/c.c<CR>
-    "    endif
 
+"""creation of c++ file"""
+function! Forcpp()
     if empty(glob("%"))
         :-1read $HOME/.config/nvim/c.c
         normal! 4j
         normal! 4l
-        normal! a
         :startinsert
-        "<CR>"/{<CR>o
     endif
 endfunction
 
-autocmd filetype c :call Forc()
-autocmd filetype cpp :call Forc()
-autocmd filetype c nmap <buffer> f :ClangFormat<cr>
-autocmd filetype cpp nmap <buffer> f :ClangFormat<cr>
+autocmd filetype c :call Forcpp()
+autocmd filetype cpp :call Forcpp()
 
-autocmd filetype python nmap <buffer> f :Yapf<cr>
-let g:yapf_style = "pep8"
 
-"for html
+"""creation of html file"""
 let g:matchup_matchparen_offscreen = {'method': 'popup'}
 
 function! Forhtml()
-    "    if !echo % == ""
-    "        echo "forc"
-    "        :-1read $HOME/.config/nvim/c.c<CR>
-    "    endif
-
     if empty(glob("%"))
         :-1read $HOME/.config/nvim/html.html
         normal! 5j
@@ -153,28 +138,66 @@ endfunction
 autocmd filetype html :call Forhtml()
 
 
-"code
-nnoremap <tab> :split<CR>:Ttoggle<cr>
+"""code formatting"""
 nnoremap f :Autoformat<cr>
-
-autocmd filetype php nnoremap <buffer> <tab> :w<CR>:split<CR>: T php % <CR>
-autocmd filetype python nnoremap <buffer> <tab> :w<CR>:split<CR>: T exec python3 -i %<CR><cr>
-autocmd filetype c nnoremap <buffer> <tab> :w<CR>:split<CR>:T g++ % -o /tmp/a.aut && echo "##running##" && /tmp/a.aut<CR><cr>
-autocmd filetype cpp nnoremap <buffer> <tab> :w<CR>:split<CR>:T g++ % -o /tmp/a.aut && echo "##running##" && /tmp/a.aut<CR><cr>
-autocmd filetype sh nnoremap <buffer> <tab> :w<CR>:split<CR>: T bash %<CR>
-
-autocmd filetype html nnoremap <buffer> <tab> :AsyncRun browser-sync start --server --no-online --no-notify --files . <CR><cr>
-"autocmd filetype html nnoremap <buffer> <tab> :!xdg-open %<cr><cr>
-
+autocmd filetype python nmap <buffer> f :Yapf<cr>
+let g:yapf_style = "pep8"
+autocmd filetype c nmap <buffer> f :ClangFormat<cr>
+autocmd filetype cpp nmap <buffer> f :ClangFormat<cr>
 autocmd filetype html inoremap <buffer> <expr> <CR> InsertMapForEnter()
 autocmd filetype html setlocal softtabstop=2
 autocmd filetype html setlocal tabstop=2
 autocmd filetype html setlocal shiftwidth=2
 
+let g:clang_format#style_options = {
+            \ "Standard" : "C++11",
+            \ "MaxEmptyLinesToKeep" : 2}
 
+"""launch code"""
 let g:neoterm_autoinsert = 1
+nnoremap <tab> :split<CR>:Ttoggle<cr>
+autocmd filetype php nnoremap <buffer> <tab> :w<CR>:split<CR>: T php %:t <CR>
+autocmd filetype python nnoremap <buffer> <tab> :w<CR>:split<CR>:T exec python3 -i %:t <cr> | redraw!
+autocmd filetype sh nnoremap <buffer> <tab> :w<CR>:split<CR>: T bash %:t<CR>
+autocmd filetype html nnoremap <buffer> <tab> :AsyncRun browser-sync start --server --no-online --no-notify --files . <CR><cr>
+"autocmd filetype html nnoremap <buffer> <tab> :!xdg-open %<cr><cr>
+"autocmd filetype c nnoremap <buffer> <tab> :w<CR>:split<CR>:T g++ %:t -o /tmp/a.aut && echo "##running##" && /tmp/a.aut<CR><cr>
+"autocmd filetype cpp nnoremap <buffer> <tab> :w<CR>:split<CR>:T g++ %:t -o /tmp/a.aut && echo "##running##" && /tmp/a.aut<CR><cr>
+"autocmd filetype cpp command Gdb call Gdb()
+autocmd filetype cpp cnoremap gdb call Gdb()
+
+function! Gdb()
+    silent update
+    split
+    :T g++ %:t -g -o /tmp/a.aut && echo "##running##" && gdb -silent /tmp/a.aut
+    let g:runned=1
+endfunction
+
+autocmd filetype c nnoremap <buffer> <tab> :call Runcpp()<cr>
+autocmd filetype cpp nnoremap <buffer> <tab> :call Runcpp()<cr>
+autocmd filetype c let g:runned=0
+autocmd filetype cpp let g:runned=0
+autocmd filetype c autocmd BufWritePost * let g:runned=0
+autocmd filetype cpp autocmd BufWritePost * let g:runned=0
+
+function! Runcpp()
+    if &modified
+        let g:runned=0
+    endif
+
+    if g:runned==0
+        silent update
+        split
+        :T g++ %:t -o /tmp/a.aut && echo "##running##" && /tmp/a.aut
+        let g:runned=1
+    else
+        split
+        :T echo "##running##" && /tmp/a.aut
+    endif
+endfunction
 
 
+"""code mappings"""
 function! InsertMapForEnter()
     if pumvisible()
         return "\<C-y>"
@@ -188,8 +211,7 @@ function! InsertMapForEnter()
 endfunction
 
 
-"coc-nvim
-
+"""coc-nvim"""
 function! CheckBackSpace() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~ '\s'
@@ -201,98 +223,84 @@ inoremap <silent><expr> <TAB>
             \ CheckBackSpace() ? "\<Tab>" :
             \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+"""theme"""
+":colorscheme dracula
+":colorscheme tokyonight-night
+":hi normal ctermbg=None
+":hi MatchParen cterm=underline ctermfg=none
 
 
-"telescope
-lua require('telescope').load_extension('fzf')
-
-"theme
-:colorscheme dracula
-:hi normal ctermbg=None
-:hi MatchParen cterm=underline ctermfg=none
-
+"""mappings"""
+cnoremap rn execute "normal \<Plug>(coc-rename)"
 
 autocmd filetype zip nnoremap <buffer> l <CR>
-"mappings
-"nnoremap tl gt
-"nnoremap th gT
-"nnoremap tt :tabnew<CR>
-"nnoremap tc :tabclose<CR>
-noremap gl %
 nnoremap <Enter> o<Esc>
 nnoremap <S-Enter> O<Esc>
-
 nnoremap <C-Space> @q
-"nnoremap / <cmd> :Telescope current_buffer_fuzzy_find<cr>
-nnoremap sf <cmd>Telescope live_grep hidden=true <cr>
-"nnoremap <Space> :Ntree<CR>
 nnoremap <Space> :Ex <bar> :sil! /<C-R>=expand("%:t")<CR><CR><cr>
 inoremap jj <esc>
 inoremap оо <esc>
 cnoremap jj <esc>
 cnoremap оо <esc>
-nnoremap <C-l> <cr>
-inoremap <C-l> <cr>
 noremap ; $
 noremap ж $
 nnoremap <C-t> :-1read $HOME/.config/nvim/c.c<CR>/{<CR>o
-nnoremap \ :Telescope current_buffer_fuzzy_find<CR>
+"nnoremap \ :Telescope current_buffer_fuzzy_find<CR>
+"nnoremap <C-l> <cr>
+"inoremap <C-l> <cr>
+"nnoremap sf <cmd>Telescope live_grep hidden=true <cr>
 
-"commands
+"""commands"""
 cnoreabbrev git !git
-"command C :w | :!cat ~/.config/nvim/c.c >> %
-"cnoreabbrev git !git
 command Wq wq!
 command WQ wq!
 command W w!
 command Q q!
 command Qa Qa!
+"command C :w | :!cat ~/.config/nvim/c.c >> %
+"cnoreabbrev git !git
+
 
 
 lua << EOF
-require("nvim-autopairs").setup {}
-local remap = vim.api.nvim_set_keymap
-local npairs = require('nvim-autopairs')
-npairs.setup({map_cr=false})
+-- require("nvim-autopairs").setup {}
 
--- skip it, if you use another global object
-_G.MUtils= {}
+require("tokyonight").setup({
+  style = "night", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+  transparent = true, -- Enable this to disable setting the background color
 
--- old version
--- MUtils.completion_confirm=function()
--- if vim.fn["coc#pum#visible"]() ~= 0 then
--- return vim.fn["coc#_select_confirm"]()
--- else
--- return npairs.autopairs_cr()
--- end
--- end
+ custom_highlights = function(colors)
+         return {
+             normal = { bg = "#000000", fg = "#ffffff" },
+             NormalFloat = { bg = colors.blue, fg = "#ffffff" },
+             Pmenu = { bg = "#414240", fg = "#ffffff" },
+             StatusLineNC = { bg = "#414240", fg = "#ffffff" },
+         }
+     end
+})
 
--- new version for custom pum
-MUtils.completion_confirm=function()
-if vim.fn["coc#pum#visible"]() ~= 0  then
-    return vim.fn["coc#pum#confirm"]()
-else
-    return npairs.autopairs_cr()
-    end
-    end
-
-remap('i' , '<CR>','v:lua.MUtils.completion_confirm()', {expr = true , noremap = true})
+vim.cmd[[colorscheme tokyonight]]
 
 local function escape(str)
--- You need to escape these characters to work correctly
-local escape_chars = [[;,."|\]]
-return vim.fn.escape(str, escape_chars)
+  -- Эти символы должны быть экранированы, если встречаются в langmap
+  local escape_chars = [[;,."|\]]
+  return vim.fn.escape(str, escape_chars)
 end
 
--- Recommended to use lua template string
-local en = [[`qwertyuiop[]asdfghjkl;'zxcvbnm/]]
-local ru = [[ёйцукенгшщзхъфывапролджэячсмить.]]
+-- Наборы символов, введенных с зажатым шифтом
 local en_shift = [[~QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>]]
 local ru_shift = [[ËЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]]
+-- Наборы символов, введенных как есть
+-- Здесь я не добавляю ',.' и 'бю', чтобы впоследствии не было рекурсивного вызова комманды
+local en = [[`qwertyuiop[]asdfghjkl;'zxcvbnm]]
+local ru = [[ёйцукенгшщзхъфывапролджэячсмить]]
 vim.opt.langmap = vim.fn.join({
--- | `to` should be first     | `from` should be second
-escape(ru_shift) .. ';' .. escape(en_shift),
-escape(ru) .. ';' .. escape(en),
+                   --  ; - разделитель, который не нужно экранировать
+                   --  |
+  escape(ru_shift) .. ';' .. escape(en_shift),
+  escape(ru) .. ';' .. escape(en),
 }, ',')
 
 EOF

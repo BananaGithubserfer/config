@@ -7,16 +7,22 @@
 #output * bg  ~/.config/sway/wallpapers/photo_2022-11-21_17-38-39.jpg fill
 exec ~/.config/sway/wall.sh
 
-output HDMI-A-1 resolution 1920x1080 position 0 0
+output HDMI-A-1 res 1920x1080 position 0 0
 output eDP-1 pos 0 1080 res 1920x1080 position 1920 0
 
 #output eDP-1 pos 1920 0 res 1920x1080
 #xwayland disable
 
 input "type:keyboard" {
-    repeat_delay 115
+#    repeat_delay 115
+    repeat_delay 200
     repeat_rate 40
 }
+
+#input "type:keyboard" {
+#    repeat_delay 155
+#    repeat_rate 10
+#}
 
 input * {
     tap enabled
@@ -27,7 +33,7 @@ input * {
 
 seat seat0 hide_cursor 5000
 floating_modifier alt normal
-exec ~/.config/sway/idle.sh
+#exec ~/.config/sway/idle.sh
 
 workspace 1 output eDP-1
 workspace 2 output HDMI-A-1
@@ -41,14 +47,13 @@ workspace 9 output eDP-1
 workspace 10 output HDMI-A-1
 
 
-    bindsym --to-code alt+y exec ~/.config/sway/y.sh
+#    bindsym --to-code alt+y exec ~/.config/sway/y.sh
 	bindsym --to-code --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
     bindsym --to-code --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
     bindsym --to-code XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
     bindsym --to-code --locked XF86MonBrightnessUp exec brightnessctl s +5%
     bindsym --to-code --locked XF86MonBrightnessDown exec brightnessctl s 5%-
     bindsym --to-code alt+t exec ( ( ps axo comm= | grep -w waybar > /dev/null ) && pkill waybar ) || waybar
-
     bindsym --to-code alt+i exec ( ( ps axo comm= | grep -w swayidle > /dev/null ) && pkill swayidle) || ~/.config/sway/idle.sh
     bindsym --to-code ctrl+alt+p exec ~/.config/sway/suspend.sh
     bindsym --to-code alt+m exec ~/.config/sway/lock.sh
@@ -118,10 +123,22 @@ gaps outer 0
 smart_borders on
 smart_gaps on
 
+
+# target                 title     bg    text   indicator  border
+client.focused           #9aa5ce #364A82 #c0caf5 #9aa5ce   #9aa5ce
+client.focused_inactive  #16161d #16161d #c0caf5 #16161d   #16161d
+client.unfocused         #16161d #16161d #c0caf5 #16161d   #16161d
+#client.focused           #b4befe #1e1e2e #cdd6f4  #f5e0dc #b4befe
+#client.focused_inactive  #6c7086 #1e1e2e #cdd6f4  #f5e0dc #6c7086
+#client.unfocused         #6c7086 #1e1e2e #cdd6f4  #f5e0dc #6c7086
+client.urgent            #fab387 #1e1e2e #fab387 #6c7086  #fab387
+client.placeholder       #6c7086 #1e1e2e #cdd6f4  #6c7086  #6c7086
+client.background        #1e1e2e
+
 # class                 border  bground text    indicator child_border
-client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
-client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
-client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
-client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
-client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
-client.background       #F8F8F2
+#client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+#client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+#client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+#client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+#client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+#client.background       #F8F8F2

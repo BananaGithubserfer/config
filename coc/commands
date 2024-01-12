@@ -1,9 +1,0 @@
-workspace.showOutput
-editor.action.formatDocument
-pyright.version
-pyright.singleTest
-pyright.addoptionalforparam
-pyright.fileTest
-python.runLinting
-python.runLinting
-python.runLinting

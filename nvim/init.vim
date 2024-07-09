@@ -37,8 +37,7 @@ Plug 'kassio/neoterm'
 Plug 'vim-autoformat/vim-autoformat'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'gregsexton/MatchTag'
-"Plug 'neoclide/coc-pairs'
-"Plug 'windwp/nvim-autopairs'
+Plug 'windwp/nvim-autopairs'
 "Plug 'gosukiwi/vim-smartpairs'
 "Plug 'dracula/vim', { 'name': 'dracula' }
 "Plug 'Wansmer/langmapper.nvim'
@@ -150,7 +149,7 @@ autocmd filetype html setlocal tabstop=2
 autocmd filetype html setlocal shiftwidth=2
 
 let g:clang_format#style_options = {
-            \ "Standard" : "C++11",
+            \ "Standard" : "c++20",
             \ "MaxEmptyLinesToKeep" : 2}
 
 """launch code"""
@@ -246,7 +245,6 @@ cnoremap jj <esc>
 cnoremap оо <esc>
 noremap ; $
 noremap ж $
-nnoremap <C-t> :-1read $HOME/.config/nvim/c.c<CR>/{<CR>o
 "nnoremap \ :Telescope current_buffer_fuzzy_find<CR>
 "nnoremap <C-l> <cr>
 "inoremap <C-l> <cr>
@@ -265,7 +263,7 @@ command Qa Qa!
 
 
 lua << EOF
--- require("nvim-autopairs").setup {}
+require("nvim-autopairs").setup {}
 
 require("tokyonight").setup({
   style = "night", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`

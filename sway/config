@@ -1,3 +1,4 @@
+exec export JAVA=1
 #output * bg ~/.config/sway/wallpapers/red_kali_dragon-wallpaper-3840x2160.jpg fill
 #output HDMI-A-1 bg ~/.config/sway/wallpapers/artix.png fill
 #output eDP-1 bg ~/.config/sway/wallpapers/linux.png fill
@@ -11,18 +12,13 @@ output HDMI-A-1 res 1920x1080 position 0 0
 output eDP-1 pos 0 1080 res 1920x1080 position 1920 0
 
 #output eDP-1 pos 1920 0 res 1920x1080
-#xwayland disable
+xwayland disable
 
 input "type:keyboard" {
-#    repeat_delay 115
-    repeat_delay 200
+    repeat_delay 130
+    #repeat_delay 300
     repeat_rate 40
 }
-
-#input "type:keyboard" {
-#    repeat_delay 155
-#    repeat_rate 10
-#}
 
 input * {
     tap enabled
@@ -47,63 +43,63 @@ workspace 9 output eDP-1
 workspace 10 output HDMI-A-1
 
 
-#    bindsym --to-code alt+y exec ~/.config/sway/y.sh
-	bindsym --to-code --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-    bindsym --to-code --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-    bindsym --to-code XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-    bindsym --to-code --locked XF86MonBrightnessUp exec brightnessctl s +5%
-    bindsym --to-code --locked XF86MonBrightnessDown exec brightnessctl s 5%-
-    bindsym --to-code alt+t exec ( ( ps axo comm= | grep -w waybar > /dev/null ) && pkill waybar ) || waybar
-    bindsym --to-code alt+i exec ( ( ps axo comm= | grep -w swayidle > /dev/null ) && pkill swayidle) || ~/.config/sway/idle.sh
-    bindsym --to-code ctrl+alt+p exec ~/.config/sway/suspend.sh
-    bindsym --to-code alt+m exec ~/.config/sway/lock.sh
-    bindsym --to-code ctrl+alt+t exec alacritty
-    bindsym --to-code ctrl+escape kill
-    bindsym --to-code ctrl+alt+y exec librewolf
-    bindsym --to-code alt+ctrl+m exec rofi -show drun -show-icons
-    bindsym --to-code alt+ctrl+d exec telegram-desktop
-    bindsym --to-code alt+r reload
-    bindsym --to-code alt+h focus left
-    bindsym --to-code alt+j focus down
-    bindsym --to-code alt+k focus up
-    bindsym --to-code alt+l focus right
-    bindsym --to-code alt+ctrl+h move left
-    bindsym --to-code alt+ctrl+j move down
-    bindsym --to-code alt+ctrl+k move up
-    bindsym --to-code alt+ctrl+l move right
-    bindsym --to-code alt+1 workspace number 1
-    bindsym --to-code alt+2 workspace number 2
-    bindsym --to-code alt+3 workspace number 3
-    bindsym --to-code alt+4 workspace number 4
-    bindsym --to-code alt+5 workspace number 5
-    bindsym --to-code alt+6 workspace number 6
-    bindsym --to-code alt+7 workspace number 7
-    bindsym --to-code alt+8 workspace number 8
-    bindsym --to-code alt+9 workspace number 9
-    bindsym --to-code alt+0 workspace number 10
-    bindsym --to-code alt+ctrl+1 move container to workspace number 1
-    bindsym --to-code alt+ctrl+2 move container to workspace number 2
-    bindsym --to-code alt+ctrl+3 move container to workspace number 3
-    bindsym --to-code alt+ctrl+4 move container to workspace number 4
-    bindsym --to-code alt+ctrl+5 move container to workspace number 5
-    bindsym --to-code alt+ctrl+6 move container to workspace number 6
-    bindsym --to-code alt+ctrl+7 move container to workspace number 7
-    bindsym --to-code alt+ctrl+8 move container to workspace number 8
-    bindsym --to-code alt+ctrl+9 move container to workspace number 9
-    bindsym --to-code alt+ctrl+0 move container to workspace number 10
-    bindsym --to-code alt+b splith
-    bindsym --to-code alt+v splitv
-    bindsym --to-code alt+e exec swaymsg exit
-#    bindsym --to-code alt+q layout stacking
-    bindsym --to-code alt+w layout tabbed
-    bindsym --to-code alt+s layout toggle split
-    bindsym --to-code alt+ctrl+f fullscreen
-    bindsym --to-code ctrl+alt+space floating toggle
-    bindsym --to-code alt+space focus mode_toggle
-    bindsym --to-code alt+a focus parent
-    bindsym --to-code alt+ctrl+minus move scratchpad
-    bindsym --to-code alt+minus scratchpad show
-    bindsym --to-code alt+p exec swaymsg -t get_tree | jq -r '.. | (.nodes? // empty)[] | select(.focused) | "\(.rect.x),\(.rect.y) \(.rect.width)x\(.rect.height)"' | grim -g - - | wl-copy -t image/png
+#bindsym --to-code alt+y exec ~/.config/sway/y.sh
+bindsym --to-code --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym --to-code --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym --to-code --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym --to-code --locked XF86MonBrightnessUp exec brightnessctl s +5%
+bindsym --to-code --locked XF86MonBrightnessDown exec brightnessctl s 5%-
+bindsym --to-code alt+t exec ( ( ps axo comm= | grep -w waybar > /dev/null ) && pkill waybar ) || waybar
+bindsym --to-code alt+i exec ( ( ps axo comm= | grep -w swayidle > /dev/null ) && pkill swayidle) || ~/.config/sway/idle.sh
+bindsym --to-code ctrl+alt+p exec ~/.config/sway/suspend.sh
+bindsym --to-code alt+m exec ~/.config/sway/lock.sh
+bindsym --to-code ctrl+alt+t exec alacritty
+bindsym --to-code ctrl+escape kill
+bindsym --to-code ctrl+alt+y exec librewolf
+bindsym --to-code alt+ctrl+m exec rofi -show drun -show-icons
+bindsym --to-code alt+ctrl+d exec telegram-desktop
+bindsym --to-code alt+r reload
+bindsym --to-code alt+h focus left
+bindsym --to-code alt+j focus down
+bindsym --to-code alt+k focus up
+bindsym --to-code alt+l focus right
+bindsym --to-code alt+ctrl+h move left
+bindsym --to-code alt+ctrl+j move down
+bindsym --to-code alt+ctrl+k move up
+bindsym --to-code alt+ctrl+l move right
+bindsym --to-code alt+1 workspace number 1
+bindsym --to-code alt+2 workspace number 2
+bindsym --to-code alt+3 workspace number 3
+bindsym --to-code alt+4 workspace number 4
+bindsym --to-code alt+5 workspace number 5
+bindsym --to-code alt+6 workspace number 6
+bindsym --to-code alt+7 workspace number 7
+bindsym --to-code alt+8 workspace number 8
+bindsym --to-code alt+9 workspace number 9
+bindsym --to-code alt+0 workspace number 10
+bindsym --to-code alt+ctrl+1 move container to workspace number 1
+bindsym --to-code alt+ctrl+2 move container to workspace number 2
+bindsym --to-code alt+ctrl+3 move container to workspace number 3
+bindsym --to-code alt+ctrl+4 move container to workspace number 4
+bindsym --to-code alt+ctrl+5 move container to workspace number 5
+bindsym --to-code alt+ctrl+6 move container to workspace number 6
+bindsym --to-code alt+ctrl+7 move container to workspace number 7
+bindsym --to-code alt+ctrl+8 move container to workspace number 8
+bindsym --to-code alt+ctrl+9 move container to workspace number 9
+bindsym --to-code alt+ctrl+0 move container to workspace number 10
+bindsym --to-code alt+b splith
+bindsym --to-code alt+v splitv
+bindsym --to-code alt+e exec swaymsg exit
+# bindsym --to-code alt+q layout stacking
+bindsym --to-code alt+w layout tabbed
+bindsym --to-code alt+s layout toggle split
+bindsym --to-code alt+ctrl+f fullscreen
+bindsym --to-code ctrl+alt+space floating toggle
+bindsym --to-code alt+space focus mode_toggle
+bindsym --to-code alt+a focus parent
+bindsym --to-code alt+ctrl+minus move scratchpad
+bindsym --to-code alt+minus scratchpad show
+bindsym --to-code alt+p exec swaymsg -t get_tree | jq -r '.. | (.nodes? // empty)[] | select(.focused) | "\(.rect.x),\(.rect.y) \(.rect.width)x\(.rect.height)"' | grim -g - - | wl-copy -t image/png
 
 mode "resize" {
     bindsym --to-code l resize shrink width 10px

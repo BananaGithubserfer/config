@@ -87,9 +87,11 @@
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
     },
-    "battery#bat2": {
-        "bat": "BAT2"
-    },
+
+    // "battery#bat2": {
+    //     "bat": "BAT2"
+    // },
+
     "network": {
         "interface": "wlan0", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",

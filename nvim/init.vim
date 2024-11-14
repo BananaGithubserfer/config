@@ -25,8 +25,7 @@
 
 """plug plugins"""
 call plug#begin()
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'mfussenegger/nvim-dap'
+Plug 'bfrg/vim-c-cpp-modern'
 Plug 'folke/tokyonight.nvim'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'mindriot101/vim-yapf'
@@ -38,17 +37,17 @@ Plug 'vim-autoformat/vim-autoformat'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'gregsexton/MatchTag'
 Plug 'windwp/nvim-autopairs'
+"Plug 'mfussenegger/nvim-dap'
 "Plug 'gosukiwi/vim-smartpairs'
 "Plug 'dracula/vim', { 'name': 'dracula' }
 "Plug 'Wansmer/langmapper.nvim'
 "Plug 'nvim-lua/plenary.nvim'
 "Plug 'cordx56/lexima.vim-coc.nvim'
+"Plug 'octol/vim-cpp-enhanced-highlight'
 "Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 "Plug 'folke/tokyonight.nvim'
 "Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 "Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make'}
-
-
 call plug#end()
 
 
@@ -80,6 +79,7 @@ let g:startify_bookmarks = [
 
 
 """netrw"""
+"let g:netrw_liststyle= 3
 let g:netrw_banner = 0
 let g:netrw_keepdir = 0
 let g:netrw_preview = 1
@@ -107,11 +107,22 @@ augroup netrw_mapping
 augroup END
 
 
+function! CppMapping()
+    inoremap <buffer> cout std::cout
+    inoremap <buffer> cin std::cin
+    inoremap <buffer> endl std::endl
+endfunction
+
+augroup cpp_mapping
+    autocmd!
+    "autocmd filetype cpp call CppMapping()
+augroup END
+
 """creation of c++ file"""
 function! Forcpp()
     if empty(glob("%"))
         :-1read $HOME/.config/nvim/c.c
-        normal! 4j
+        normal! 3j
         normal! 4l
         :startinsert
     endif

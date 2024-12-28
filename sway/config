@@ -10,6 +10,7 @@ exec ~/.config/sway/wall.sh
 
 output HDMI-A-1 res 1920x1080 position 0 0
 output eDP-1 pos 0 1080 res 1920x1080 position 1920 0
+#output eDP-1 transform 90
 
 #output eDP-1 pos 1920 0 res 1920x1080
 xwayland disable
@@ -17,7 +18,7 @@ xwayland disable
 input "type:keyboard" {
     repeat_delay 130
     #repeat_delay 300
-    repeat_rate 40
+    repeat_rate 27
 }
 
 input * {

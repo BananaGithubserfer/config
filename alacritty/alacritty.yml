@@ -18,7 +18,7 @@ font:
   size: 18
 
 key_bindings:
-    # (Windows, Linux, and BSD only)
+  # (Windows, Linux, and BSD only)
   - { key: V,         mods: Control, action: Paste                       }
   - { key: C,         mods: Control, action: Copy                        }
   - { key: Insert,    mods: Shift,         action: PasteSelection              }
@@ -96,4 +96,4 @@ colors:
     blue: '#2A7BDE'
     magenta: '#C061CB'
     cyan: '#33C7DE'
-    white: '#ffffff'
+   white: '#ffffff'

@@ -1,9 +1,0 @@
-# GIMP action-history
-
-(history-item "edit-clear" 5)
-(history-item "file-open" 0)
-(history-item "tools-free-select" 0)
-(history-item "tools-bucket-fill" 0)
-(history-item "file-quit" 1)
-
-# end of action-history

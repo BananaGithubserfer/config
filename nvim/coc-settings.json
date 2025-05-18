@@ -1,0 +1,12 @@
+{
+    "clangd.arguments": ["--header-insertion=iwyu"],
+    "blade.completion.enableSnippets": true,
+    "inlayHint.enable": false,
+    "python.linting.enabled": true,
+    "suggest.enablePreselect": false,
+    "suggest.noselect": true,
+    "clangd.disableSnippetCompletion": true,
+//    "-hover.floatConfig": {"border": true},
+//    "-suggest.floatConfig": {"border": true},
+//    "-diagnostic.floatConfig": {"border": true}
+}

@@ -1,0 +1,15 @@
+#export XDG_CURRENT_DESKTOP=sway
+#export WLR_NO_HARDWARE_CURSORS=1
+
+if test -z "${XDG_RUNTIME_DIR}"; then
+  UID="$(id -u)"
+  export XDG_RUNTIME_DIR=/tmp/"${UID}"-runtime-dir
+    if ! test -d "${XDG_RUNTIME_DIR}"; then
+        mkdir "${XDG_RUNTIME_DIR}"
+        chmod 0700 "${XDG_RUNTIME_DIR}"
+    fi
+fi
+
+
+[ "$(tty)" = "/dev/tty1" ] && dbus-run-session sway
+source .bashrc

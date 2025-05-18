@@ -1,4 +1,0 @@
-{AMD/AMD Radeon Vega 8 Graphics (radeonsi, raven, LLVM 17.0.6, DRM 3.57, 6.8.4-artix1-1)/4.6 (Core Profile) Mesa 24.0.4-arch1.2}=SUPPORTED
-{AMD/AMD Radeon Vega 8 Graphics (radeonsi, raven, LLVM 17.0.6, DRM 3.57, 6.8.4-artix1-1)/4.6 (Core Profile) Mesa 24.0.6-arch1.2}=SUPPORTED
-{AMD/AMD Radeon Vega 8 Graphics (radeonsi, raven, LLVM 17.0.6, DRM 3.57, 6.8.9-artix1-2)/4.6 (Core Profile) Mesa 24.0.6-arch1.2}=SUPPORTED
-{Mesa/llvmpipe (LLVM 17.0.6, 256 bits)/4.5 (Core Profile) Mesa 24.0.6-arch1.2}=SUPPORTED
